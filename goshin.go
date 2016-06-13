@@ -2,12 +2,13 @@ package goshin
 
 import (
 	"fmt"
-	"github.com/amir/raidman"
-	"github.com/tjgq/broadcast"
 	"log/syslog"
 	"math"
 	"strings"
 	"time"
+
+	"github.com/amir/raidman"
+	"github.com/tjgq/broadcast"
 )
 
 var logger, _ = syslog.New(syslog.LOG_DAEMON, "goshin")
@@ -30,19 +31,19 @@ func NewThreshold() *Threshold {
 }
 
 type Goshin struct {
-	Address       string
-	EventHost     string
-	Interval      int
-	Tag           []string
-	Ttl           float32
-	Ifaces        map[string]bool
-	IgnoreIfaces  map[string]bool
-	Devices       map[string]bool
-	IgnoreDevices map[string]bool
-	Thresholds    map[string]*Threshold
-	Checks        map[string]bool
+	Address        string
+	EventHost      string
+	Interval       int
+	Tag            []string
+	Ttl            float32
+	Ifaces         map[string]bool
+	IgnoreIfaces   map[string]bool
+	Devices        map[string]bool
+	IgnoreDevices  map[string]bool
+	Thresholds     map[string]*Threshold
+	Checks         map[string]bool
 	ConnectionType string
-	Timeout int
+	Timeout        int
 }
 
 func NewGoshin() *Goshin {
@@ -141,7 +142,7 @@ func (g *Goshin) Report(reportQueue chan *Metric) {
 
 	for {
 		if connected == false {
-			c, connError = raidman.DialWithTimeout(g.ConnectionType, g.Address, time.Duration(g.Timeout) * time.Second)
+			c, connError = raidman.DialWithTimeout(g.ConnectionType, g.Address, time.Duration(g.Timeout)*time.Second)
 		}
 
 		if connError != nil {
